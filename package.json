@@ -1,0 +1,36 @@
+{
+    "name": "dummy-name",
+    "version": "0.1.0",
+    "description": "",
+    "type": "module",
+    "main": "dist/index.js",
+    "license": "MIT",
+    "scripts": {
+        "preinstall": "npx only-allow pnpm",
+        "prepare": "husky install",
+        "prebuild": "rimraf dist",
+        "build": "pnpm prebuild && tsc && tsc-alias",
+        "build:watch": "pnpm prebuild && tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
+        "start": "node ./dist/index.js"
+    },
+    "devDependencies": {
+        "@types/node": "^18.7.16",
+        "@typescript-eslint/eslint-plugin": "^5.36.2",
+        "@typescript-eslint/parser": "^5.36.2",
+        "concurrently": "^7.4.0",
+        "eslint": "^8.23.1",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "husky": "^8.0.1",
+        "prettier": "^2.7.1",
+        "rimraf": "^3.0.2",
+        "ts-node": "^10.9.1",
+        "tsc-alias": "^1.7.0",
+        "tsconfig-paths": "^4.1.0",
+        "typescript": "^4.8.3"
+    },
+    "dependencies": {
+        "chalk": "^5.0.1",
+        "commander": "^9.4.0"
+    }
+}
