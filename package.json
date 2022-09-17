@@ -4,6 +4,12 @@
     "description": "A simple typescript cli tool template",
     "license": "MIT",
     "type": "module",
+    "keywords": [],
+    "author": {
+        "name": "Pcrab",
+        "email": "pcrab@pcrab.xyz",
+        "url": "https://github.com/Pcrab"
+    },
     "sideEffects": false,
     "exports": {
         ".": {
