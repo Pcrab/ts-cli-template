@@ -1,6 +1,6 @@
-import test from "@/test/test.js";
-import chalk from "chalk";
+export const one = 1;
+export const two = 2;
 
-console.log(test);
-console.log(chalk.blue("Hello"));
-console.log('test');
+export const testFun = () => {
+    return "testFun";
+};
