@@ -1,13 +1,16 @@
 {
-    "name": "pkg-name",
+    "name": "pls-storage",
     "version": "0.0.1",
-    "description": "A simple typescript cli tool template",
+    "description": "A simple typescript library to enhance browser local/session storage",
     "license": "MIT",
     "type": "module",
-    "keywords": [],
-    "homepage": "https://github.com/Pcrab/ts-cli-template",
-    "bugs": "https://github.com/Pcrab/ts-cli-template/issues",
-    "repository": "github:Pcrab/ts-cli-template",
+    "keywords": [
+        "browser",
+        "storage"
+    ],
+    "homepage": "https://github.com/Pcrab/pls-storage",
+    "bugs": "https://github.com/Pcrab/pls-storage/issues",
+    "repository": "github:Pcrab/pls-storage",
     "author": {
         "name": "Pcrab",
         "email": "pcrab@pcrab.xyz",
