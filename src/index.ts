@@ -1,6 +1,4 @@
-export const one = 1;
-export const two = 2;
+import { CustomLocalStorage } from "./storage.js";
 
-export const testFun = () => {
-    return "testFun";
-};
+export const lstorage = new CustomLocalStorage("local");
+export const sstorage = new CustomLocalStorage("session");
