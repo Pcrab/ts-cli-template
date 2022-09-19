@@ -24,6 +24,9 @@ export class CustomLocalStorage {
     };
 
     setItem = (key: string, value: unknown, options?: StorageOptions) => {
+        if (value === undefined || value === null) {
+            return;
+        }
         const originValue = this.#customStorage[key];
         if (originValue && originValue.readOnly && options?.force) {
             return;
@@ -34,7 +37,7 @@ export class CustomLocalStorage {
         const JSONValue: StorageValue<unknown> = {
             value,
             expiresAt,
-            readOnly: options?.readOnly || false,
+            readOnly: options?.readOnly,
             timeout: options?.expiresAt
                 ? this.#buildTimeout(key, options.expiresAt)
                 : undefined,

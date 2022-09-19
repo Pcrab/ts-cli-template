@@ -2,7 +2,7 @@ export type Timeout = ReturnType<typeof setTimeout>;
 
 export interface BrowserStorageValue<T> {
     value: T;
-    readOnly: boolean;
+    readOnly: boolean | undefined;
     expiresAt: string | undefined;
 }
 
