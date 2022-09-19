@@ -1,3 +1,4 @@
+import { appendPrefix, removePrefix } from "./common.js";
 import {
     BrowserStorageValue,
     StorageOptions,
@@ -5,13 +6,13 @@ import {
     Timeout,
 } from "./types.js";
 
-const prefix = "$PLS_STORAGE_";
+export const prefix = "$PLS_STORAGE_";
 
 export class CustomLocalStorage {
     readonly length: number = 0;
     clear = () => {
         Object.entries(this.#customStorage).forEach(([key, value]) => {
-            this.#storage?.removeItem(key);
+            this.#storage?.removeItem(appendPrefix(key));
             if (value.timeout) {
                 clearTimeout(value.timeout);
             }
@@ -28,35 +29,42 @@ export class CustomLocalStorage {
             return;
         }
         const originValue = this.#customStorage[key];
-        if (originValue && originValue.readOnly && options?.force) {
+        if (originValue && originValue.readOnly && !options?.force) {
             return;
         }
         const expiresAt = options?.expiresAt
             ? options?.expiresAt.toJSON()
             : undefined;
+        const timeout = options?.expiresAt
+            ? this.#buildTimeout(appendPrefix(key), options.expiresAt)
+            : undefined;
         const JSONValue: StorageValue<unknown> = {
             value,
             expiresAt,
+            timeout,
             readOnly: options?.readOnly,
-            timeout: options?.expiresAt
-                ? this.#buildTimeout(key, options.expiresAt)
-                : undefined,
         };
         const storageValue = JSON.stringify(JSONValue);
-        this.#storage?.setItem(key, storageValue);
+        this.#storage?.setItem(appendPrefix(key), storageValue);
         this.#customStorage[key] = JSONValue;
     };
 
     #customStorage: Record<string, StorageValue<unknown>> = {};
     #storage: Storage | undefined;
 
+    /**
+     * Used to build timeout function to clear key in #storage
+     * @param key - Key of #storage (with prefix)
+     * @param expiresAt
+     */
     #buildTimeout = (key: string, expiresAt: Date): Timeout => {
         let time = new Date().getTime() - expiresAt.getTime();
         if (time < 0) {
             time = 0;
         }
         return setTimeout(() => {
-            delete this.#customStorage[key];
+            delete this.#customStorage[removePrefix(key)];
+            this.#storage?.removeItem(key);
         }, time);
     };
 
@@ -82,7 +90,7 @@ export class CustomLocalStorage {
                     }
                     timeout = this.#buildTimeout(key, expiresAt);
                 }
-                this.#customStorage[key] = {
+                this.#customStorage[key.slice(prefix.length)] = {
                     ...storageValue,
                     timeout,
                 };
