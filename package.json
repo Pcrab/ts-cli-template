@@ -46,7 +46,8 @@
         "dev": "unbuild --stub",
         "lint:fix": "eslint src --fix",
         "lint": "eslint src",
-        "test": "jest"
+        "test": "jest",
+        "prepublishOnly": "pnpm check && pnpm test && pnpm build"
     },
     "devDependencies": {
         "@commitlint/cli": "^17.1.2",
