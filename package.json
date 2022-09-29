@@ -8,8 +8,8 @@
         "browser",
         "storage"
     ],
-    "homepage": "https://github.com/Pcrab/template",
-    "bugs": "https://github.com/Pcrab/template/issues",
+    "homepage": "https://github.com/Pcrab/ts-cli-template",
+    "bugs": "https://github.com/Pcrab/ts-cli-template/issues",
     "repository": "github:Pcrab/ts-cli-template",
     "author": {
         "name": "Pcrab",
