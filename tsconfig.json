@@ -98,6 +98,7 @@
     "include": [
         "src/**/*",
         "build.config.ts",
+        "commitlint.config.ts",
         "jest.config.ts"
     ]
 }
